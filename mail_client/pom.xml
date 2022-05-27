@@ -33,6 +33,11 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.sun.mail</groupId>
+      <artifactId>jakarta.mail</artifactId>
+      <version>1.6.4</version>
+  </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -79,6 +84,7 @@
         </configuration>
         <executions>
           <execution>
+            <?m2e ignore?>
             <id>checkstyle</id>
             <phase>validate</phase>
             <goals>
