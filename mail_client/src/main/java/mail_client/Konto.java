@@ -5,14 +5,12 @@ public class Konto {
     private String passwort;
     private String hostServer;
     private int port;
-    private KontoController kontoSchnittstelle;
 
     public Konto(String mailAdresse, String passwort, String hostServer, int port) {
         this.mailAdresse = mailAdresse;
         this.passwort = passwort;
         this.hostServer = hostServer;
         this.port = port;
-        kontoSchnittstelle = new KontoController(this);
     }
 
     public String getMailAdresse() {
@@ -47,12 +45,10 @@ public class Konto {
         this.passwort = passwort;
     }
 
-    public KontoController getKontoSchnittstelle() {
-        return kontoSchnittstelle;
-    }
-
-    public void setKontoSchnittstelle(KontoController kontoSchnittstelle) {
-        this.kontoSchnittstelle = kontoSchnittstelle;
+    @Override
+    public String toString() {
+        return "Konto [hostServer=" + hostServer + ", mailAdresse="
+                + mailAdresse + ", passwort=" + passwort + ", port=" + port + "]";
     }
 
 }

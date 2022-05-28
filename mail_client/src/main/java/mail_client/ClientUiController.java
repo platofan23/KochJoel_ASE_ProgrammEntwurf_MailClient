@@ -9,6 +9,9 @@ public class ClientUiController {
         for (ClientUiCommands clientUiCommand : ClientUiCommands.values()) {
             System.out.println(clientUiCommand.getCommand() + ": " + clientUiCommand.getDescription());
         }
+        for (KontoUiCommands kontoUiCommand : KontoUiCommands.values()) {
+            System.out.println(kontoUiCommand.getCommand() + ": " + kontoUiCommand.getDescription());
+        }
 
     }
 }
