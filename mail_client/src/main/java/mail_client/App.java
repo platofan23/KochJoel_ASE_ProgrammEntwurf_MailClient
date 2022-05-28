@@ -1,17 +1,12 @@
 package mail_client;
 
-/**
- * Hello world!
- */
 public final class App {
     private App() {
     }
 
-    /**
-     * Says hello to the world.
-     * @param args The arguments of the program.
-     */
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println("Herzlich Willkommen zu dem ASE-Projekt Email-Client von Joel Koch aus dem Kurs TINF19B5\n");
+        ClientUi clientUi = new ClientUi();
+        clientUi.startUi();
     }
 }
