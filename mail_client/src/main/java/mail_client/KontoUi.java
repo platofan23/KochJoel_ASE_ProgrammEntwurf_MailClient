@@ -1,9 +1,10 @@
 package mail_client;
+
 import java.util.ArrayList;
 
 public class KontoUi {
     private ArrayList<Konto> konten;
-    private Command commands;
+    private KontoCommands commands;
 
     public KontoUi() {
         konten = new ArrayList<Konto>();
@@ -22,8 +23,7 @@ public class KontoUi {
     }
 
     public void changeSpecificKonto() {
-        
+
     }
 
-    
 }

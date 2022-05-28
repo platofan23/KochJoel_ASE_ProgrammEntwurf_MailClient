@@ -15,7 +15,19 @@ public class ClientUi {
         this.kontoUi = kontoUi;
     }
 
-    
-    
-    
+    public void startUI() {
+        boolean end = false;
+        while (end == false) {
+            String command = BaseActions.readText();
+            if (command.equals(ClientUiCommands.St.getCommand())) {
+
+            }
+
+            if (command.equals(ClientUiCommands.Qu.getCommand())) {
+                ClientUiController.endProgramm();
+            }
+
+        }
+    }
+
 }
