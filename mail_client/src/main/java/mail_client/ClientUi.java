@@ -2,9 +2,11 @@ package mail_client;
 
 public class ClientUi {
     private KontoUi kontoUi;
+    private EmailUi emailUi;
 
     public ClientUi() {
         kontoUi = new KontoUi();
+        emailUi = new EmailUi();
     }
 
     public void startUi() {
@@ -41,24 +43,27 @@ public class ClientUi {
             if (command.equals(KontoUiCommands.Remove.getCommand())) {
                 System.out.println("Bitte gib die Mail-Adresse für das Konto ein welches entfernt werden soll!");
                 String mailAdresse = BaseActions.readText();
-                this.kontoUi.getKonten().remove(this.kontoUi.getSpecificKonto(mailAdresse));
+                Konto specificKonto = this.kontoUi.getSpecificKonto(mailAdresse);
+                this.kontoUi.getKonten().remove(specificKonto);
             }
 
             if (command.equals(KontoUiCommands.Get.getCommand())) {
                 System.out.println(
                         "Bitte gib die Mail-Adresse für das Konto ein welches die Details angezeigt werden sollen!");
                 String mailAdresse = BaseActions.readText();
-                if (this.kontoUi.getSpecificKonto(mailAdresse) != null) {
-                    System.out.println(this.kontoUi.getSpecificKonto(mailAdresse).toString());
-                } else {
-                    System.out.println("Es existiert kein Konto mit dieser Email-Adresse!");
+                Konto specificKonto = this.kontoUi.getSpecificKonto(mailAdresse);
+                String specificKontoString = specificKonto.toString();
+                if (specificKonto != null) {
+                    System.out.println(specificKontoString);
                 }
             }
 
             if (command.equals(KontoUiCommands.GetAll.getCommand())) {
-                if (this.kontoUi.getAllKonten().equals("") == false) {
+                String alleKonten = this.kontoUi.getAllKonten();
+                if (alleKonten.equals("") == false) {
                     System.out.println("Kontoliste:");
-                    System.out.println(this.kontoUi.getAllKonten());
+
+                    System.out.println(alleKonten);
                 } else {
                     System.out.println("Keine Konten vorhanden!");
                 }
@@ -68,35 +73,45 @@ public class ClientUi {
                 System.out.println(
                         "Bitte gib die Mail-Adresse für das Konto ein welches die Parameter geändert werden sollen!");
                 String mailAdresse = BaseActions.readText();
-                if (this.kontoUi.getSpecificKonto(mailAdresse) != null) {
+                Konto specificKonto = this.kontoUi.getSpecificKonto(mailAdresse);
+                if (specificKonto != null) {
                     System.out.println(
                             "Was möchten Sie ändern? Tippe 1 für die Mail-Adresse, 2 für das Passwort, 3 für den HostServer, 4 für den Namen und 5 für den Port!");
-                    String choiceNumber = BaseActions.readText();
+                    int choiceNumber = 0;
+                    try {
+                        choiceNumber = Integer.parseInt(BaseActions.readText());
+                    } catch (NumberFormatException ex) {
+                        System.out.println("Eingabe war keine Zahl! Überspringe!");
+                    }
                     switch (choiceNumber) {
-                        case ("1"):
+                        case (1):
                             System.out.println("Geben Sie die neue Mail-Adresse ein!");
                             String mailAdresseNeu = BaseActions.readText();
-                            this.kontoUi.getSpecificKonto(mailAdresse).setMailAdresse(mailAdresseNeu);
+                            specificKonto.setMailAdresse(mailAdresseNeu);
                             break;
-                        case ("2"):
+                        case (2):
                             System.out.println("Geben Sie das neue Passwort ein!");
                             String passwortNeu = BaseActions.readText();
-                            this.kontoUi.getSpecificKonto(mailAdresse).setPasswort(passwortNeu);
+                            specificKonto.setPasswort(passwortNeu);
                             break;
-                        case ("3"):
+                        case (3):
                             System.out.println("Geben Sie den HostServer ein!");
                             String hostServerNeu = BaseActions.readText();
-                            this.kontoUi.getSpecificKonto(mailAdresse).setHostServer(hostServerNeu);
+                            specificKonto.setHostServer(hostServerNeu);
                             break;
-                        case ("4"):
+                        case (4):
                             System.out.println("Geben Sie den neuen Port ein!");
-                            int nameNeu = Integer.parseInt(BaseActions.readText());
-                            this.kontoUi.getSpecificKonto(mailAdresse).setPort(nameNeu);
+                            try {
+                                int nameNeu = Integer.parseInt(BaseActions.readText());
+                                specificKonto.setPort(nameNeu);
+                            } catch (NumberFormatException ex) {
+                                System.out.println("Eingabe war keine Zahl! Überspringe!");
+                            }
                             break;
-                        case ("5"):
+                        case (5):
                             System.out.println("Geben Sie den neuen Port ein!");
                             int portNeu = Integer.parseInt(BaseActions.readText());
-                            this.kontoUi.getSpecificKonto(mailAdresse).setPort(portNeu);
+                            specificKonto.setPort(portNeu);
                             break;
                         default:
                             System.out.println("Ungültige Eingabe! Überspringe!");
@@ -104,6 +119,25 @@ public class ClientUi {
                 } else {
                     System.out.println("Es existiert kein Konto mit dieser Email-Adresse!");
                 }
+            }
+
+            if (command.equals(EmailUiCommands.WR.getCommand())) {
+                System.out.println("***************************************************************");
+                System.out.println("Sie haben " + EmailUiCommands.WR.getCommand() + " ausgewählt!");
+                System.out.println("***************************************************************");
+                System.out.println("An wie viele Personenen soll die Email gesendet werden?");
+
+                System.out.println("Bitte gib die Mail-Adresse für das Konto ein welches hinzugefügt werden soll!");
+                String mailAdresseEmpfaenger = BaseActions.readText();
+                System.out.println("Bitte gib das Passwort für das Konto ein welches hinzugefügt werden soll!");
+                String nameEmpfaenger = BaseActions.readText();
+                System.out.println("Bitte gib den Namen für das Konto ein welches hinzugefügt werden soll!");
+                String subject = BaseActions.readText();
+                System.out.println("Bitte gib den HostServer für das Konto ein welches hinzugefügt werden soll!");
+                String body = BaseActions.readText();
+                System.out.println("Bitte gib den Port für das Konto ein welches hinzugefügt werden soll!");
+                String type = BaseActions.readText();
+
             }
         }
     }
