@@ -37,4 +37,8 @@ public class KontoUiController {
         return back;
     }
 
+    public static void changeMailAdress(ArrayList<Konto> konten, String mailAdresse) {
+
+    }
+
 }

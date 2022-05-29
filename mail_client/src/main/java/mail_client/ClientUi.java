@@ -7,14 +7,6 @@ public class ClientUi {
         kontoUi = new KontoUi();
     }
 
-    public KontoUi getKontoUi() {
-        return kontoUi;
-    }
-
-    public void setKontoUi(KontoUi kontoUi) {
-        this.kontoUi = kontoUi;
-    }
-
     public void startUi() {
         boolean end = false;
         while (end == false) {
@@ -109,4 +101,11 @@ public class ClientUi {
         }
     }
 
+    public KontoUi getKontoUi() {
+        return kontoUi;
+    }
+
+    public void setKontoUi(KontoUi kontoUi) {
+        this.kontoUi = kontoUi;
+    }
 }

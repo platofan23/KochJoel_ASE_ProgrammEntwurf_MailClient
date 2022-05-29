@@ -21,10 +21,6 @@ public class KontoUi {
         return KontoUiController.getSpecificKonto(konten, mailAdresse);
     }
 
-    public void changeSpecificKonto() {
-
-    }
-
     public String getAllKonten() {
         return KontoUiController.getAllKonten(konten);
     }
