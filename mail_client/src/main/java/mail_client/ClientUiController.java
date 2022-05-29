@@ -7,11 +7,40 @@ public class ClientUiController {
 
     public static void showCommandList() {
         for (ClientUiCommands clientUiCommand : ClientUiCommands.values()) {
-            System.out.println(clientUiCommand.getCommand() + ": " + clientUiCommand.getDescription());
+            String ausgabe = "---" + clientUiCommand.getCommand() + ": " + clientUiCommand.getDescription() + "---";
+            for (int i = 0; i < ausgabe.length(); i++) {
+                if (i < ausgabe.length() - 1) {
+                    System.out.print("-");
+                } else {
+                    System.out.println("-");
+                }
+            }
+            System.out.println(ausgabe);
+            for (int i = 0; i < ausgabe.length(); i++) {
+                if (i < ausgabe.length() - 1) {
+                    System.out.print("-");
+                } else {
+                    System.out.println("-");
+                }
+            }
         }
         for (KontoUiCommands kontoUiCommand : KontoUiCommands.values()) {
-            System.out.println(kontoUiCommand.getCommand() + ": " + kontoUiCommand.getDescription());
+            String ausgabe = "---" + kontoUiCommand.getCommand() + ": " + kontoUiCommand.getDescription() + "---";
+            for (int i = 0; i < ausgabe.length(); i++) {
+                if (i < ausgabe.length() - 1) {
+                    System.out.print("-");
+                } else {
+                    System.out.println("-");
+                }
+            }
+            System.out.println(ausgabe);
+            for (int i = 0; i < ausgabe.length(); i++) {
+                if (i < ausgabe.length() - 1) {
+                    System.out.print("-");
+                } else {
+                    System.out.println("-");
+                }
+            }
         }
-
     }
 }

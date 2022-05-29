@@ -15,9 +15,18 @@ public class ClientUi {
         boolean end = false;
         while (end == false) {
             System.out
-                    .println("Warte auf Eingabe! Tippe " + ClientUiCommands.CMD.getCommand() + " für die Befehlliste!");
+                    .println("********************************************************");
+            System.out
+                    .println("***Warte auf Eingabe! Tippe " + ClientUiCommands.CMD.getCommand()
+                            + " für die Befehlliste!***");
+            System.out
+                    .println(
+                            "********************************************************\n");
             String command = BaseActions.readText();
             if (command.equals(ClientUiCommands.Qu.getCommand())) {
+                System.out.println("*********************************");
+                System.out.println("***Sie haben " + ClientUiCommands.Qu.getCommand() + " ausgewählt!***");
+                System.out.println("*********************************\n");
                 System.out.println("**************************");
                 System.out.println("***Beende das Programm!***");
                 System.out.println("**************************");
@@ -25,6 +34,9 @@ public class ClientUi {
             }
 
             if (command.equals(ClientUiCommands.CMD.getCommand())) {
+                System.out.println("*********************************");
+                System.out.println("***Sie haben " + ClientUiCommands.CMD.getCommand() + " ausgewählt!***");
+                System.out.println("*********************************\n");
                 System.out.println("*********************");
                 System.out.println("***Die Befehlliste***");
                 System.out.println("*********************\n");
@@ -32,11 +44,16 @@ public class ClientUi {
             }
 
             if (command.equals(KontoUiCommands.Add.getCommand())) {
+                System.out.println("*********************************");
+                System.out.println("***Sie haben " + KontoUiCommands.Add.getCommand() + " ausgewählt!***");
+                System.out.println("*********************************\n");
                 System.out.println("****************************************************************************");
                 System.out.println("***Bitte gib den Namen für das Konto ein welches hinzugefügt werden soll!***");
                 System.out.println("****************************************************************************\n");
                 String mailAdresse = BaseActions.readText();
-                System.out.println("Bitte gib das Passwort für das Konto ein welches hinzugefügt werden soll!");
+                System.out.println("*******************************************************************************");
+                System.out.println("***Bitte gib das Passwort für das Konto ein welches hinzugefügt werden soll!***");
+                System.out.println("*******************************************************************************\n");
                 String passwort = BaseActions.readText();
                 System.out.println("****************************************************************************");
                 System.out.println("***Bitte gib den Namen für das Konto ein welches hinzugefügt werden soll!***");
@@ -56,16 +73,22 @@ public class ClientUi {
             }
 
             if (command.equals(KontoUiCommands.Remove.getCommand())) {
+                System.out.println("***********************************");
+                System.out.println("***Sie haben " + KontoUiCommands.Remove.getCommand() + " ausgewählt!***");
+                System.out.println("***********************************\n");
                 System.out.println("********************************************************************************");
                 System.out.println("***Bitte gib die Mail-Adresse für das Konto ein welches entfernt werden soll!***");
                 System.out
-                        .println("*********************************************************************************\n");
+                        .println("********************************************************************************\n");
                 String mailAdresse = BaseActions.readText();
                 Konto specificKonto = this.kontoUi.getSpecificKonto(mailAdresse);
                 this.kontoUi.getKonten().remove(specificKonto);
             }
 
             if (command.equals(KontoUiCommands.Get.getCommand())) {
+                System.out.println("********************************");
+                System.out.println("***Sie haben " + KontoUiCommands.Get.getCommand() + " ausgewählt!***");
+                System.out.println("********************************\n");
                 System.out.println(
                         "***********************************************************************************************");
                 System.out.println(
@@ -81,19 +104,33 @@ public class ClientUi {
             }
 
             if (command.equals(KontoUiCommands.GetAll.getCommand())) {
+                System.out.println("***********************************");
+                System.out.println("***Sie haben " + KontoUiCommands.GetAll.getCommand() + " ausgewählt!***");
+                System.out.println("***********************************\n");
                 String alleKonten = this.kontoUi.getAllKonten();
                 if (alleKonten.equals("") == false) {
-                    System.out.println("Kontoliste:");
+                    System.out.println("*****************");
+                    System.out.println("***Kontoliste:***");
+                    System.out.println("*****************");
 
                     System.out.println(alleKonten);
                 } else {
-                    System.out.println("Keine Konten vorhanden!");
+                    System.out.println("*****************************");
+                    System.out.println("***Keine Konten vorhanden!***");
+                    System.out.println("*****************************\n");
                 }
             }
 
             if (command.equals(KontoUiCommands.Change.getCommand())) {
+                System.out.println("***********************************");
+                System.out.println("***Sie haben " + KontoUiCommands.Change.getCommand() + " ausgewählt!***");
+                System.out.println("***********************************\n");
+                System.out.println(
+                        "******************************************************************************************");
                 System.out.println(
                         "Bitte gib die Mail-Adresse für das Konto ein welches die Parameter geändert werden sollen!");
+                System.out.println(
+                        "******************************************************************************************\n");
                 String mailAdresse = BaseActions.readText();
                 Konto specificKonto = this.kontoUi.getSpecificKonto(mailAdresse);
                 if (specificKonto != null) {
