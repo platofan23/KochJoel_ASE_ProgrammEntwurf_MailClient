@@ -28,11 +28,13 @@ public class ClientUi {
                 String mailAdresse = BaseActions.readText();
                 System.out.println("Bitte gib das Passwort für das Konto ein welches hinzugefügt werden soll!");
                 String passwort = BaseActions.readText();
+                System.out.println("Bitte gib den Namen für das Konto ein welches hinzugefügt werden soll!");
+                String name = BaseActions.readText();
                 System.out.println("Bitte gib den HostServer für das Konto ein welches hinzugefügt werden soll!");
                 String hostServer = BaseActions.readText();
                 System.out.println("Bitte gib den Port für das Konto ein welches hinzugefügt werden soll!");
                 int port = Integer.parseInt(BaseActions.readText());
-                Konto konto = new Konto(mailAdresse, passwort, hostServer, port);
+                Konto konto = new Konto(mailAdresse, passwort, hostServer, name, port);
                 this.kontoUi.addKonto(konto);
             }
 
@@ -68,7 +70,7 @@ public class ClientUi {
                 String mailAdresse = BaseActions.readText();
                 if (this.kontoUi.getSpecificKonto(mailAdresse) != null) {
                     System.out.println(
-                            "Was möchten Sie ändern? Tippe 1 für die Mail-Adresse, 2 für das Passwort, 3 für den HostServer und 4 für den Port!");
+                            "Was möchten Sie ändern? Tippe 1 für die Mail-Adresse, 2 für das Passwort, 3 für den HostServer, 4 für den Namen und 5 für den Port!");
                     String choiceNumber = BaseActions.readText();
                     switch (choiceNumber) {
                         case ("1"):
@@ -87,6 +89,11 @@ public class ClientUi {
                             this.kontoUi.getSpecificKonto(mailAdresse).setHostServer(hostServerNeu);
                             break;
                         case ("4"):
+                            System.out.println("Geben Sie den neuen Port ein!");
+                            int nameNeu = Integer.parseInt(BaseActions.readText());
+                            this.kontoUi.getSpecificKonto(mailAdresse).setPort(nameNeu);
+                            break;
+                        case ("5"):
                             System.out.println("Geben Sie den neuen Port ein!");
                             int portNeu = Integer.parseInt(BaseActions.readText());
                             this.kontoUi.getSpecificKonto(mailAdresse).setPort(portNeu);

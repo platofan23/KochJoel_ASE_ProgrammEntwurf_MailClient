@@ -4,12 +4,14 @@ public class Konto {
     private String mailAdresse;
     private String passwort;
     private String hostServer;
+    private String name;
     private int port;
 
-    public Konto(String mailAdresse, String passwort, String hostServer, int port) {
+    public Konto(String mailAdresse, String passwort, String hostServer, String name, int port) {
         this.mailAdresse = mailAdresse;
         this.passwort = passwort;
         this.hostServer = hostServer;
+        this.name = name;
         this.port = port;
     }
 
@@ -45,10 +47,18 @@ public class Konto {
         this.passwort = passwort;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
-        return "Konto [hostServer=" + hostServer + ", mailAdresse="
-                + mailAdresse + ", passwort=" + passwort + ", port=" + port + "]";
+        return "Konto [hostServer=" + hostServer + ", mailAdresse=" + mailAdresse + ", name=" + name + ", passwort="
+                + passwort + ", port=" + port + "]";
     }
 
 }
