@@ -6,4 +6,11 @@ public class EmailUi {
 
     }
 
+    public void sendEmail(Email email) {
+        if (email.getType().equals("Text")) {
+            EmailUiController.sendTextEmail(email);
+        } else {
+            EmailUiController.sendHtmlEmail(email);
+        }
+    }
 }

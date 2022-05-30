@@ -1,6 +1,7 @@
 package mail_client;
 
-public enum KontoUiCommands {
+public enum KontoUiCommands 
+{
     Add("/Add", "Dieser Befehl fügt ein neues Konto zum Client hinzu!"),
     Remove("/Remove", "Dieser Befehl löscht ein Konto aus dem Client!"),
     Get("/Get", "Dieser Befehl lässt die ganzen Details eines Kontos anzeigen!"),
@@ -10,16 +11,19 @@ public enum KontoUiCommands {
     private final String command;
     private final String description;
 
-    KontoUiCommands(String command, String description) {
+    KontoUiCommands(String command, String description) 
+    {
         this.command = command;
         this.description = description;
     }
 
-    public String getCommand() {
+    public String getCommand() 
+    {
         return command;
     }
 
-    public String getDescription() {
+    public String getDescription() 
+    {
         return description;
     }
 }
