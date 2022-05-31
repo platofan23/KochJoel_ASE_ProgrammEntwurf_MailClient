@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Properties;
 
 import jakarta.mail.Address;
+import jakarta.mail.Flags;
 import jakarta.mail.Folder;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
@@ -297,24 +298,254 @@ public class EmailUiController
 			while (ex != null);
 		}
 	}
-	public static void showEmail() 
-	{
 
+	public static void listEmail(Konto konto) 
+	{
+		try 
+		{
+			Properties properties = new Properties();
+			int port = konto.getPortImap();
+			String imapServer = konto.getImapServer();
+			String user = konto.getMailAdresse();
+			String password = konto.getPasswort();
+			properties.put("mail.imap.host", imapServer);
+			properties.put("mail.imap.port", port);
+			properties.put("mail.imap.starttls.enable", true);
+			Session emailSession = Session.getDefaultInstance(properties);
+		
+			Store store = emailSession.getStore("imaps");
+	  
+			store.connect(imapServer, user, password);
+	  
+			Folder emailFolder = store.getFolder("INBOX");
+			emailFolder.open(Folder.READ_ONLY);
+	  
+			Message[] messages = emailFolder.getMessages();
+			System.out.println("messages.length---" + messages.length);
+	  
+			for (int i = 0, n = messages.length; i < n; i++) 
+			{
+			   Message message = messages[i];
+			   System.out.println("---------------------------------");
+			   System.out.println("Email Number " + (i + 1));
+			   System.out.println("Subject: " + message.getSubject());
+			   System.out.println("From: " + message.getFrom()[0]);
+			}
+	  
+			emailFolder.close(false);
+			store.close();
+	  
+			} 
+			catch (NoSuchProviderException e) 
+			{
+			   e.printStackTrace();
+			} 
+			catch (MessagingException e) 
+			{
+			   e.printStackTrace();
+			} 
+			catch (Exception e) 
+			{
+			   e.printStackTrace();
+			}
 	}
 
-	public static void ListEmail() 
+	public static void showEmail(Konto konto) 
 	{
+		try 
+		{
+			Properties properties = new Properties();
+			int port = konto.getPortImap();
+			String imapServer = konto.getImapServer();
+			String user = konto.getMailAdresse();
+			String password = konto.getPasswort();
+			properties.put("mail.imap.host", imapServer);
+			properties.put("mail.imap.port", port);
+			properties.put("mail.imap.starttls.enable", true);
+			Session emailSession = Session.getDefaultInstance(properties);
+		
+			Store store = emailSession.getStore("imaps");
+	  
+			store.connect(imapServer, user, password);
+	  
+			Folder emailFolder = store.getFolder("INBOX");
+			emailFolder.open(Folder.READ_WRITE);
+	  
+			Message[] messages = emailFolder.getMessages();
 
+			for (int i = 0, n = messages.length; i < n; i++) 
+			{
+			   Message message = messages[i];
+			   System.out.println("---------------------------------");
+			   System.out.println("Email Number " + (i + 1));
+			   System.out.println("Subject: " + message.getSubject());
+			   System.out.println("From: " + message.getFrom()[0]);
+			}
+			
+			System.out.println("****************************************************************************");
+			System.out.println("***Welche Email möchten Sie einsehn? Geben Sie die Nummer der E-Mail ein!***");
+			System.out.println("****************************************************************************\n");
+			int emailNumer = Integer.parseInt(BaseActions.readText());
+			System.out.println("From: " + messages[emailNumer-1].getFrom()[0]);
+			System.out.println("Subject: " + messages[emailNumer-1].getSubject());
+			Address[] reciepents = messages[emailNumer-1].getAllRecipients();
+			for(int m = 0; m < reciepents.length; m++) 
+			{
+				System.out.println("Recipient " + m + ":" + reciepents[m]);
+			}
+			System.out.println("Subject: " + messages[emailNumer-1].getContent());
+			System.out.println("Content: " + messages[emailNumer-1].getContent());
+
+			messages[emailNumer-1].setFlag(Flags.Flag.SEEN,true);
+
+			emailFolder.close(false);
+			store.close();
+	  
+			} 
+			catch (NoSuchProviderException e) 
+			{
+			   e.printStackTrace();
+			} 
+			catch (MessagingException e) 
+			{
+			   e.printStackTrace();
+			} 
+			catch (Exception e) 
+			{
+			   e.printStackTrace();
+			}
 	}
 
-	public static void DeleteEmail() 
+	public static void deleteEmail(Konto konto) 
 	{
+		try 
+		{
+			Properties properties = new Properties();
+			int port = konto.getPortImap();
+			String imapServer = konto.getImapServer();
+			String user = konto.getMailAdresse();
+			String password = konto.getPasswort();
+			properties.put("mail.imap.host", imapServer);
+			properties.put("mail.imap.port", port);
+			properties.put("mail.imap.starttls.enable", true);
+			Session emailSession = Session.getDefaultInstance(properties);
+		
+			Store store = emailSession.getStore("imaps");
+	  
+			store.connect(imapServer, user, password);
+	  
+			Folder emailFolder = store.getFolder("INBOX");
+			emailFolder.open(Folder.READ_WRITE);
+	  
+			Message[] messages = emailFolder.getMessages();
 
+			for (int i = 0, n = messages.length; i < n; i++) 
+			{
+			   Message message = messages[i];
+			   System.out.println("---------------------------------");
+			   System.out.println("Email Number " + (i + 1));
+			   System.out.println("Subject: " + message.getSubject());
+			   System.out.println("From: " + message.getFrom()[0]);
+			}
+			
+			System.out.println("****************************************************************************");
+			System.out.println("***Welche Email möchten Sie löschen? Geben Sie die Nummer der E-Mail ein!***");
+			System.out.println("****************************************************************************\n");
+			int emailNumer = Integer.parseInt(BaseActions.readText());
+			System.out.println("From: " + messages[emailNumer-1].getFrom()[0]);
+			System.out.println("Subject: " + messages[emailNumer-1].getSubject());
+			Address[] reciepents = messages[emailNumer-1].getAllRecipients();
+			for(int m = 0; m < reciepents.length; m++) 
+			{
+				System.out.println("Recipient " + m + ":" + reciepents[m]);
+			}
+			System.out.println("Subject: " + messages[emailNumer-1].getContent());
+			System.out.println("Content: " + messages[emailNumer-1].getContent());
+
+			messages[emailNumer-1].setFlag(Flags.Flag.DELETED,true);
+
+			emailFolder.close(false);
+			store.close();
+	  
+			} 
+			catch (NoSuchProviderException e) 
+			{
+			   e.printStackTrace();
+			} 
+			catch (MessagingException e) 
+			{
+			   e.printStackTrace();
+			} 
+			catch (Exception e) 
+			{
+			   e.printStackTrace();
+			}
 	}
 
-	public static void ForwardEmail() 
+	public static void forwardEmail(Konto konto) 
 	{
+		try 
+		{
+			Properties properties = new Properties();
+			int port = konto.getPortImap();
+			String imapServer = konto.getImapServer();
+			String user = konto.getMailAdresse();
+			String password = konto.getPasswort();
+			properties.put("mail.imap.host", imapServer);
+			properties.put("mail.imap.port", port);
+			properties.put("mail.imap.starttls.enable", true);
+			Session emailSession = Session.getDefaultInstance(properties);
+		
+			Store store = emailSession.getStore("imaps");
+	  
+			store.connect(imapServer, user, password);
+	  
+			Folder emailFolder = store.getFolder("INBOX");
+			emailFolder.open(Folder.READ_WRITE);
+	  
+			Message[] messages = emailFolder.getMessages();
 
+			for (int i = 0, n = messages.length; i < n; i++) 
+			{
+			   Message message = messages[i];
+			   System.out.println("---------------------------------");
+			   System.out.println("Email Number " + (i + 1));
+			   System.out.println("Subject: " + message.getSubject());
+			   System.out.println("From: " + message.getFrom()[0]);
+			}
+			
+			System.out.println("*********************************************************************************");
+			System.out.println("***Welche Email möchten Sie weiterleiten? Geben Sie die Nummer der E-Mail ein!***");
+			System.out.println("*********************************************************************************\n");
+			int emailNumer = Integer.parseInt(BaseActions.readText());
+			System.out.println("From: " + messages[emailNumer-1].getFrom()[0]);
+			System.out.println("Subject: " + messages[emailNumer-1].getSubject());
+			Address[] reciepents = messages[emailNumer-1].getAllRecipients();
+			for(int m = 0; m < reciepents.length; m++) 
+			{
+				System.out.println("Recipient " + m + ":" + reciepents[m]);
+			}
+			System.out.println("Subject: " + messages[emailNumer-1].getContent());
+			System.out.println("Content: " + messages[emailNumer-1].getContent());
+
+			//messages[emailNumer-1].setFlag(Flags.Flag.DELETED,true);
+
+			emailFolder.close(false);
+			store.close();
+	  
+			} 
+			catch (NoSuchProviderException e) 
+			{
+			   e.printStackTrace();
+			} 
+			catch (MessagingException e) 
+			{
+			   e.printStackTrace();
+			} 
+			catch (Exception e) 
+			{
+			   e.printStackTrace();
+			}
 	}
 
 

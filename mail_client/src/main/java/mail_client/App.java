@@ -18,7 +18,7 @@ public final class App {
                 KontoUi kontoUi = new KontoUi();
                 AdressbuchUi adressbuchUi = new AdressbuchUi();
 
-                kontoUi.getKontoVerwaltung().addKonto(new Konto("/W","itinimcqsauafchm","smtp.gmail.com","imap.google.com","Jona Müller",587,993));
+                kontoUi.getKontoVerwaltung().addKonto(new Konto("tischtennismeisterelf@gmail.com","itinimcqsauafchm","smtp.gmail.com","imap.gmail.com","Jona Müller",587,993));
                 adressbuchUi.getAdressbuch().addKontakt(new Kontakt("Jona Müller", "müller@web.de", "NTT", "01251651"));
                 EmailUi emailUi = new EmailUi();
                 boolean end = false;

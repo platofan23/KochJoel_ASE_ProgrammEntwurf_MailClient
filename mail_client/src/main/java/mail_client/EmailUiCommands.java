@@ -6,7 +6,7 @@ public enum EmailUiCommands
     SH("/Show", "Dieser Befehl startet das Anzeigen einer EMail!"),
     LI("/List", "Dieser Befehl listet die EMails im Posteingang!"),
     FW("/Forward", "Dieser Befehl leitet eine Email weiter!"),
-    Del("/Delete", "Der Befehl zeigt die Befehlliste an!");
+    Del("/Delete", "Der Befehl wird zum Löschen einer Email benötigt an!");
 
     private final String command;
     private final String description;

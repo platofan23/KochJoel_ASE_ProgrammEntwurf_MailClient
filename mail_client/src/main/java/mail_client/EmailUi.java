@@ -128,6 +128,27 @@ public class EmailUi
             }
             isDone = true;
         }
+        if (command.equals(EmailUiCommands.LI.getCommand())) 
+        {
+            System.out.println("**********************************");
+            System.out.println("***Sie haben " + EmailUiCommands.LI.getCommand() + " ausgewählt!***");
+            System.out.println("**********************************\n");
+            System.out.println("********************************************");
+            System.out.println("***Bitte gebe die gewünschte Adresse ein!***");
+            System.out.println("*******************************************\n");
+            String abrufer = BaseActions.readText();
+            Konto abruf = kontoUi.getKontoVerwaltung().getSpecificKonto(abrufer);  
+            if (abruf != null) 
+            {
+                EmailUiController.listEmail(abruf);
+            }
+            else 
+            {
+                System.out.println("***************************************************************");
+                System.out.println("***Konto mit der eingegebenen Email-Adresse existiert nicht!***");
+                System.out.println("***************************************************************\n");   
+            }
+        }
         if (command.equals(EmailUiCommands.SH.getCommand())) 
         {
             System.out.println("**********************************");
@@ -136,9 +157,64 @@ public class EmailUi
             System.out.println("********************************************");
             System.out.println("***Bitte gebe die gewünschte Adresse ein!***");
             System.out.println("*******************************************\n");
-            String absender = BaseActions.readText();
-            Konto sender = kontoUi.getKontoVerwaltung().getSpecificKonto(absender);  
+            String abrufer = BaseActions.readText();
+            Konto abruf = kontoUi.getKontoVerwaltung().getSpecificKonto(abrufer);  
+            if (abruf != null) 
+            {
+                EmailUiController.showEmail(abruf);
+            }
+            else 
+            {
+                System.out.println("***************************************************************");
+                System.out.println("***Konto mit der eingegebenen Email-Adresse existiert nicht!***");
+                System.out.println("***************************************************************\n");   
+            }
         }
+
+        if (command.equals(EmailUiCommands.Del.getCommand())) 
+        {
+            System.out.println("**********************************");
+            System.out.println("***Sie haben " + EmailUiCommands.Del.getCommand() + " ausgewählt!***");
+            System.out.println("**********************************\n");
+            System.out.println("********************************************");
+            System.out.println("***Bitte gebe die gewünschte Adresse ein!***");
+            System.out.println("*******************************************\n");
+            String abrufer = BaseActions.readText();
+            Konto abruf = kontoUi.getKontoVerwaltung().getSpecificKonto(abrufer);  
+            if (abruf != null) 
+            {
+                EmailUiController.deleteEmail(abruf);
+            }
+            else 
+            {
+                System.out.println("***************************************************************");
+                System.out.println("***Konto mit der eingegebenen Email-Adresse existiert nicht!***");
+                System.out.println("***************************************************************\n");   
+            }
+        }
+
+        if (command.equals(EmailUiCommands.FW.getCommand())) 
+        {
+            System.out.println("**********************************");
+            System.out.println("***Sie haben " + EmailUiCommands.FW.getCommand() + " ausgewählt!***");
+            System.out.println("**********************************\n");
+            System.out.println("********************************************");
+            System.out.println("***Bitte gebe die gewünschte Adresse ein!***");
+            System.out.println("*******************************************\n");
+            String abrufer = BaseActions.readText();
+            Konto abruf = kontoUi.getKontoVerwaltung().getSpecificKonto(abrufer);  
+            if (abruf != null) 
+            {
+                EmailUiController.deleteEmail(abruf);
+            }
+            else 
+            {
+                System.out.println("***************************************************************");
+                System.out.println("***Konto mit der eingegebenen Email-Adresse existiert nicht!***");
+                System.out.println("***************************************************************\n");   
+            }
+        }
+
         return isDone;
     }
 }
