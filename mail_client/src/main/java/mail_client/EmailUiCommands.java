@@ -3,6 +3,9 @@ package mail_client;
 public enum EmailUiCommands 
 {
     WR("/Write", "Dieser Befehl startet das Schreiben einer EMail!"),
+    SH("/Show", "Dieser Befehl startet das Anzeigen einer EMail!"),
+    LI("/List", "Dieser Befehl listet die EMails im Posteingang!"),
+    FW("/Forward", "Dieser Befehl leitet eine Email weiter!"),
     Del("/Delete", "Der Befehl zeigt die Befehlliste an!");
 
     private final String command;

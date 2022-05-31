@@ -6,7 +6,7 @@ public class BaseActions
 {
     private static Scanner scanner = new Scanner(System.in);;
 
-    public BaseActions() 
+    private BaseActions() 
     {
 
     }

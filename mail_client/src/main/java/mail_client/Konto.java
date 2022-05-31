@@ -4,17 +4,22 @@ public class Konto
 {
     private String mailAdresse;
     private String passwort;
-    private String hostServer;
+    private String smtpServer;
+    private String imapServer;
     private String name;
-    private int port;
+    private int portSmtp;
+    private int portImap;
 
-    public Konto(String mailAdresse, String passwort, String hostServer, String name, int port) 
+    public Konto(String mailAdresse, String passwort, String smtpServer, String imapServer, String name, int portSmtp,
+            int portImap) 
     {
         this.mailAdresse = mailAdresse;
         this.passwort = passwort;
-        this.hostServer = hostServer;
+        this.smtpServer = smtpServer;
+        this.imapServer = imapServer;
         this.name = name;
-        this.port = port;
+        this.portSmtp = portSmtp;
+        this.portImap = portImap;
     }
 
     public String getMailAdresse() 
@@ -27,24 +32,43 @@ public class Konto
         this.mailAdresse = mailAdresse;
     }
 
-    public String getHostServer() 
-    {
-        return hostServer;
+    public String getSmtpServer() {
+        return smtpServer;
     }
 
-    public void setHostServer(String hostServer) 
+    public void setSmtpServer(String smtpServer) 
     {
-        this.hostServer = hostServer;
+        this.smtpServer = smtpServer;
     }
 
-    public int getPort() 
+    public String getImapServer() 
     {
-        return port;
+        return imapServer;
     }
 
-    public void setPort(int port) 
+    public void setImapServer(String imapServer) 
     {
-        this.port = port;
+        this.imapServer = imapServer;
+    }
+
+    public int getPortSmtp() 
+    {
+        return portSmtp;
+    }
+
+    public void setPortSmtp(int portSmtp) 
+    {
+        this.portSmtp = portSmtp;
+    }
+
+    public int getPortImap() 
+    {
+        return portImap;
+    }
+
+    public void setPortImap(int portImap) 
+    {
+        this.portImap = portImap;
     }
 
     public String getPasswort() 
@@ -70,8 +94,8 @@ public class Konto
     @Override
     public String toString() 
     {
-        return "Konto [hostServer=" + hostServer + ", mailAdresse=" + mailAdresse + ", name=" + name + ", passwort="
-                + passwort + ", port=" + port + "]";
+        return "Konto [imapServer=" + imapServer + ", mailAdresse=" + mailAdresse + ", name=" + name + ", passwort="
+                + passwort + ", portImap=" + portImap + ", portSmtp=" + portSmtp + ", smtpServer=" + smtpServer + "]\n";
     }
 
 }

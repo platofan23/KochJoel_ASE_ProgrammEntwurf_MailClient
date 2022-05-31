@@ -16,6 +16,10 @@ public final class App {
 
                 ClientUi clientUi = new ClientUi();
                 KontoUi kontoUi = new KontoUi();
+                AdressbuchUi adressbuchUi = new AdressbuchUi();
+
+                kontoUi.getKontoVerwaltung().addKonto(new Konto("/W","itinimcqsauafchm","smtp.gmail.com","imap.google.com","Jona Müller",587,993));
+                adressbuchUi.getAdressbuch().addKontakt(new Kontakt("Jona Müller", "müller@web.de", "NTT", "01251651"));
                 EmailUi emailUi = new EmailUi();
                 boolean end = false;
                 while (end == false) 
@@ -39,6 +43,11 @@ public final class App {
                         if(isDone == false) 
                         {
                                 emailUi.startUi(command,kontoUi);
+                        }
+
+                        if(isDone == false) 
+                        {
+                                adressbuchUi.startUi(command);
                         }
                 }
 

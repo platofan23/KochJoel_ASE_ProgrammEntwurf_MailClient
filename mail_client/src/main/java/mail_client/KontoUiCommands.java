@@ -2,11 +2,11 @@ package mail_client;
 
 public enum KontoUiCommands 
 {
-    Add("/Add", "Dieser Befehl fügt ein neues Konto zum Client hinzu!"),
-    Remove("/Remove", "Dieser Befehl löscht ein Konto aus dem Client!"),
-    Get("/Get", "Dieser Befehl lässt die ganzen Details eines Kontos anzeigen!"),
-    GetAll("/GetAll", "Dieser Befehl lässt die ganzen Konten anzeigen!"),
-    Change("/Change", "Dieser Befehl lässt die Parameter eines Kontos anpassen!");
+    Add("/AddKonto", "Dieser Befehl fügt ein neues Konto zum Client hinzu!"),
+    Remove("/RemoveKonto", "Dieser Befehl löscht ein Konto aus dem Client!"),
+    Get("/GetKonto", "Dieser Befehl lässt die ganzen Details eines Kontos anzeigen!"),
+    GetAll("/GetAllKonten", "Dieser Befehl lässt die ganzen Konten anzeigen!"),
+    Change("/ChangeKonto", "Dieser Befehl lässt die Parameter eines Kontos anpassen!");
 
     private final String command;
     private final String description;

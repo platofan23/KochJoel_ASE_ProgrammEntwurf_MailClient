@@ -1,16 +1,9 @@
 package mail_client;
 
-import java.util.ArrayList;
-
 public class ClientUi 
 {
-    private KontoUi kontoUi;
-    private EmailUi emailUi;
-
     public ClientUi() 
     {
-        kontoUi = new KontoUi();
-        emailUi = new EmailUi();
     }
 
     public boolean startUi(String command) 
@@ -40,15 +33,5 @@ public class ClientUi
             isDone = true;
         }      
         return isDone;
-    }
-
-    public KontoUi getKontoUi() 
-    {
-        return kontoUi;
-    }
-
-    public void setKontoUi(KontoUi kontoUi) 
-    {
-        this.kontoUi = kontoUi;
     }
 }
