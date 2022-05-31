@@ -518,8 +518,6 @@ public class EmailUiController
 			System.out.println("***Welche Email möchten Sie weiterleiten? Geben Sie die Nummer der E-Mail ein!***");
 			System.out.println("*********************************************************************************\n");
 			int emailNumer = Integer.parseInt(BaseActions.readText());
-			System.out.println("From: " + messages[emailNumer-1].getFrom()[0]);
-			System.out.println("Subject: " + messages[emailNumer-1].getSubject());
 			Address[] reciepents = messages[emailNumer-1].getAllRecipients();
 			for(int m = 0; m < reciepents.length; m++) 
 			{
@@ -528,7 +526,121 @@ public class EmailUiController
 			System.out.println("Subject: " + messages[emailNumer-1].getContent());
 			System.out.println("Content: " + messages[emailNumer-1].getContent());
 
-			//messages[emailNumer-1].setFlag(Flags.Flag.DELETED,true);
+			String bodyHtml = messages[emailNumer-1].getContent().toString();
+			String subjectHtml = messages[emailNumer-1].getSubject();
+
+			System.out.println("**************************************************");
+			System.out.println("***An wenn möchsten Sie die Email weiterleiten?***");
+			System.out.println("**************************************************n");
+			String forwardTo = BaseActions.readText();
+			ArrayList<Empfaenger> empfaengersHtml = new ArrayList<Empfaenger>();
+			empfaengersHtml.add(new Empfaenger(forwardTo, "No name"));
+	
+	
+			String senderHtml = konto.getMailAdresse();
+			String passwordHtml = konto.getPasswort();
+			String hostServerHtml = konto.getSmtpServer();
+			int portSmtpHtml = konto.getPortSmtp();
+	
+			Properties props = new Properties();
+			props.put("mail.from", senderHtml);
+			props.put("mail.user", senderHtml);
+			props.put("mail.smtp.host", hostServerHtml);
+			props.put("mail.transport.protocol", "smtp");
+			props.put("mail.protocol.host", hostServerHtml);
+			props.put("mail.protocol.port", portSmtpHtml);
+			props.put("mail.smtp.starttls.enable", true);
+			props.put("mail.smtp.auth", true);
+			props.put("mail.debug", true);
+	
+			Session session = Session.getInstance(props, new jakarta.mail.Authenticator() 
+			{
+				protected PasswordAuthentication getPasswordAuthentication() 
+				{
+					return new PasswordAuthentication(senderHtml, passwordHtml);
+				}
+			});
+			session.setDebug(true);
+	
+			try 
+			{
+				int i = 0;
+				MimeMessage msgHtml = new MimeMessage(session);
+				InternetAddress senderAdressHtml = new InternetAddress(senderHtml);
+				Address[] toAddrsHtml = new InternetAddress[empfaengersHtml.size()];
+	
+				msgHtml.setSubject("Forwarded: " + subjectHtml);
+				msgHtml.setText(bodyHtml);
+				msgHtml.setFrom(senderAdressHtml);
+				msgHtml.setSentDate(new Date());
+				msgHtml.setContent(bodyHtml, "text/html");
+	
+				for (Empfaenger empfaenger : empfaengersHtml) 
+				{
+					toAddrsHtml[i] = new InternetAddress(empfaenger.getMailAdress());
+					i = i + 1;
+				}
+				msgHtml.setRecipients(Message.RecipientType.TO, toAddrsHtml);
+				
+				Transport.send(msgHtml);
+			} 
+			catch (MessagingException mex) 
+			{
+				System.out.println("**********************************************");
+				System.out.println("***Exception handling in msgsendsample.java***");
+				System.out.println("**********************************************\n");
+				mex.printStackTrace();
+				Exception ex = mex;
+				do {
+					if (ex instanceof SendFailedException) 
+					{
+						SendFailedException sfex = (SendFailedException) ex;
+						Address[] invalid = sfex.getInvalidAddresses();
+						if (invalid != null) 
+						{
+							System.out.println("******************************");
+							System.out.println("***    ** Invalid Addresses***");
+							System.out.println("******************************\n");
+							for (int i = 0; i < invalid.length; i++) 
+							{
+								System.out.println("         " + invalid[i]);
+							}
+						}
+						Address[] validUnsent = sfex.getValidUnsentAddresses();
+						if (validUnsent != null) 
+						{
+							System.out.println("**********************************");
+							System.out.println("***    ** ValidUnsent Addresses***");
+							System.out.println("**********************************\n");
+							for (int i = 0; i < validUnsent.length; i++) 
+							{
+								System.out.println("         " + validUnsent[i]);
+							}
+						}
+						Address[] validSent = sfex.getValidSentAddresses();
+						if (validSent != null) 
+						{
+							System.out.println("********************************");
+							System.out.println("***    ** ValidSent Addresses***");
+							System.out.println("********************************\n");
+							for (int i = 0; i < validSent.length; i++) 
+							{
+								System.out.println("         " + validSent[i]);
+							}
+						}
+					}
+					System.out.println();
+					if (ex instanceof MessagingException) 
+					{
+						ex = ((MessagingException) ex).getNextException();
+					} 
+					else 
+					{
+						ex = null;
+					}
+				} 
+				while (ex != null);
+			}
 
 			emailFolder.close(false);
 			store.close();
@@ -545,8 +657,6 @@ public class EmailUiController
 			catch (Exception e) 
 			{
 			   e.printStackTrace();
-			}
+			}		
 	}
-
-
 }

@@ -205,7 +205,7 @@ public class EmailUi
             Konto abruf = kontoUi.getKontoVerwaltung().getSpecificKonto(abrufer);  
             if (abruf != null) 
             {
-                EmailUiController.deleteEmail(abruf);
+                EmailUiController.forwardEmail(abruf);
             }
             else 
             {
